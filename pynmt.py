@@ -25,7 +25,7 @@ TGT_LANGUAGE = 'py'
 # special_token IDX
 UNK_IDX, PAD_IDX, SOS_IDX, EOS_IDX = 0, 1, 2, 3
 
-tokenizer = Tokenizer("user_simpledic.csv", udic_type="simpledic", udic_enc="utf8", wakati=True)
+tokenizer = Tokenizer("tatoeba/user_simpledic.csv", udic_type="simpledic", udic_enc="utf8", wakati=True)
 
 def jpn_tokenizer(text):
   return [token for token in tokenizer.tokenize(text) if token != " " and len(token) != 0]
