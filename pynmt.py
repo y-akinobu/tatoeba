@@ -8,6 +8,10 @@ import math
 import re
 import numpy as np
 from janome.tokenizer import Tokenizer
+from google_drive_downloader import GoogleDriveDownloader
+
+GoogleDriveDownloader.download_file_from_google_drive(file_id="1zMTrsmcyF2oXpWKe0bIZ7Ej1JBjVq7np",dest_path="./model_DS.pt", unzip=False)
+GoogleDriveDownloader.download_file_from_google_drive(file_id="13C39jfdkkmE2mx-1K9PFXqGST84j-mz8",dest_path="./vocab_obj_DS.pth", unzip=False)
 
 # デバイスの指定
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -246,6 +250,8 @@ def PyNMT(trained_model, vocab):
     nmt.load(trained_model)
     return nmt
 
+nmt = PyNMT('model_DS.pt', 'vocab_obj_DS.pth')
+
 special_token = ['<A>', '<B>', '<C>', '<D>', '<E>']
 
 def generate(sentence):
@@ -256,3 +262,6 @@ def generate(sentence):
   pred, prob = nmt.translate_beam(sentence)
   print(pred)
   print(prob)
+
+sentence = 'dfの先頭を表示する'
+generate(sentence)
